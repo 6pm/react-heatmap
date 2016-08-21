@@ -51,27 +51,27 @@ class Heatmap extends React.Component {
 
         legendSettings: [
             {
-                color: '#f5d3d2',
+                color: '#dee086',
                 min: 0,
                 max: 10
             },
             {
-                color: '#de9290',
+                color: '#9ebe65',
                 min: 10,
                 max: 25
             },
             {
-                color: '#ca4b47',
+                color: '#659b3e',
                 min: 25,
                 max: 50
             },
             {
-                color: '#b31a1a',
+                color: '#647832',
                 min: 50,
                 max: 75
             },
             {
-                color: '#4e0000',
+                color: '#37621e',
                 min: 75,
                 max: 100
             }

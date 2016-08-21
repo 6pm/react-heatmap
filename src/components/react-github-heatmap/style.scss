@@ -77,22 +77,19 @@
   &__item {
     float: left;
     margin-bottom: 10px;
-    &:hover {
-      .heatmap__day {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        background-color: #ddd;
-      }
-    }
   }
 
   &__caption {
     text-align: center;
-    font-size: 12px;
+    font-size: 0.8em;
+    color: #000;
     text-transform: uppercase;
     letter-spacing: 1px;
+    transition: color 0.3s;
+    .heatmap__item:hover & {
+      color: #37621e;
+    }
+
   }
   
   &__days-wrap {
@@ -109,10 +106,14 @@
     }
   }
   &__day {
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
     background-color: #eee;
     text-align: center;
-    font-size: 0.8em;
+    font-size: 0.7em;
     transition: all 0.3s;
+    cursor: default;
 
     .is-gorizontal & {
       float: left;

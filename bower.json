@@ -1,0 +1,28 @@
+{
+  "name": "react-github-heatmap",
+  "description": "react github heatmap",
+  "main": "index.js",
+  "authors": [
+    "Vyacheslav Troyan"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "github",
+    "diagram",
+    "github",
+    "heatmap",
+    "react",
+    "component"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "name": "react-github-heatmap",
-  "description": "react github heatmap",
+  "name": "react-heatmap",
+  "description": "react github-like heatmap",
   "main": "index.js",
   "authors": [
     "Vyacheslav Troyan"

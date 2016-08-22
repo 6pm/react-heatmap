@@ -1,12 +1,12 @@
 {
-  "name": "redux-ru-tutorial",
+  "name": "react-heatmap",
   "version": "1.0.0",
-  "description": "Redux RU tutorial",
+  "description": "react github-like heatmap",
   "main": "index.js",
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Maxim Patsianskiy",
+  "author": "Vyacheslav Troyan",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.4.5",

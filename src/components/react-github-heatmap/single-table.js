@@ -9,6 +9,18 @@ export default  class SingleTable extends Component {
         data: false
     }
 
+    static defaultProps = {
+        days: { // @todo - add support start week from sunday
+            mon: 0,
+            tue: 1,
+            wed: 2,
+            thu: 3,
+            fri: 4,
+            sat: 5,
+            sun: 6
+        }
+    }
+
     componentDidMount() {
         let p = this.props
 
@@ -18,7 +30,6 @@ export default  class SingleTable extends Component {
             })
         });
     }
-
 
 
     /**
@@ -32,7 +43,9 @@ export default  class SingleTable extends Component {
     }
 
     /**
+     * get all days in month
      *
+     * @return - days for render
      */
     getDaysInMonth(showDays, year, month, daySizes) {
         let allDays = moment(`${year} ${month}`, 'YYYY M').daysInMonth(),
@@ -72,19 +85,23 @@ export default  class SingleTable extends Component {
             minHeight: size + 'px',
             lineHeight: size + 'px',
             margin: margin + 'px'
-
         }
     }
 
     /**
+     * if month begins from tuesday - add 1 indent day,
+     * if begins from wednesday - add 2 indent days ...
      *
+     * @return(Array) - indent days from month
      */
     getIndentDays(year, month, itemSizes) {
         let indentDays = [],
-            firstDay = moment(`${year} ${month} 1`, 'YYYY M D').format('d');
+            firstDay = moment(`${year} ${month} 1`, 'YYYY M D').format('ddd')
 
-        for (var i = 1; i < firstDay; i++) {
-            indentDays.push(<span className="heatmap__day is-hidden" style={itemSizes} key={i}></span>);
+        firstDay = firstDay.toLowerCase()
+
+        for (var i = 1; i <= this.props.days[firstDay]; i++) {
+            indentDays.push(<span className="heatmap__day is-hidden" style={itemSizes} key={i}></span>)
         }
 
         return indentDays;

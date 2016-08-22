@@ -3,7 +3,6 @@ import moment from 'moment'
 import ReactDOM from 'react-dom'
 import SingleTable from './single-table'
 import HeatmapEmitter from './EventEmitter'
-// import ReactDOM from 'react-dom'
 
 require('./style.scss');
 
@@ -21,7 +20,7 @@ class Heatmap extends React.Component {
     }
 
     state = {
-        showNavButtons: false
+        showNavButtons: true
     }
 
     static propTypes = {
@@ -102,10 +101,10 @@ class Heatmap extends React.Component {
 
     /**
      *
-     * @param start(Array) -
-     * @param end(Array) -
+     * @param start(Array) - start date
+     * @param end(Array) - end date
      *
-     * @return (Number) -
+     * @return (Number) - days from start to end
      */
     getDiffMonths(start, end) {
         let startDate = this.convertDateToArray(start),
@@ -122,6 +121,7 @@ class Heatmap extends React.Component {
      *
      * @return(Array) -
      */
+    // @todo - fix generate dates for long period(more than 1 year)
     getDates(start, end) {
         let result = [];
 
@@ -136,8 +136,30 @@ class Heatmap extends React.Component {
             start = moment(start, DATE_FORMAT).add(1, 'months').format(DATE_FORMAT);
         }
 
-        return result;
+        return result
     }
+    // getDates(start, end) {
+    //     let result = [],
+    //         begin = start
+    //
+    //     // get monts from props
+    //     while (this.getDiffMonths(begin, end) > 0) {
+    //         result.push({
+    //             year: moment(begin, DATE_FORMAT).format('YYYY'),
+    //             month: moment(begin, DATE_FORMAT).format('M')
+    //         });
+    //
+    //         // add 1 month
+    //         setTimeout(()=>{
+    //             begin = moment(begin, DATE_FORMAT).add(1, 'months').format(DATE_FORMAT)
+    //             console.log(begin)
+    //         }, 0)
+    //
+    //     }
+    //
+    //     console.log(result)
+    //     return result
+    // }
 
     /**
      *

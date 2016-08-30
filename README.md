@@ -2,7 +2,11 @@
 
 > Easily create diagram. Data in diagran can dynamically changed and updated.
 
-##### [View Live Demo](http://demo.com/)
+### Demo
+
+![alt text](https://raw.githubusercontent.com/6pm/react-heatmap/master/heatmap-demo.gif)
+
+
 
 
 ### Dependencies

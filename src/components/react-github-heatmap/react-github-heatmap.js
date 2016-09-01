@@ -100,6 +100,7 @@ class Heatmap extends React.Component {
     }
 
     /**
+     * get the difference between two months - start and end date
      *
      * @param start(Array) - start date
      * @param end(Array) - end date
@@ -116,14 +117,14 @@ class Heatmap extends React.Component {
     /**
      * collect all months in calendar from start to end
      *
-     * @param start(String) -
-     * @param end(String) -
+     * @param start(String) - start date
+     * @param end(String) - end date
      *
-     * @return(Array) -
+     * @return(Array) - array with dates from start to end
      */
-    // @todo - fix generate dates for long period(more than 1 year)
+
     getDates(start, end) {
-        let result = [];
+        let result = []
 
         // get monts from props
         while (this.getDiffMonths(start, end) > 0) {
@@ -138,48 +139,28 @@ class Heatmap extends React.Component {
 
         return result
     }
-    // getDates(start, end) {
-    //     let result = [],
-    //         begin = start
-    //
-    //     // get monts from props
-    //     while (this.getDiffMonths(begin, end) > 0) {
-    //         result.push({
-    //             year: moment(begin, DATE_FORMAT).format('YYYY'),
-    //             month: moment(begin, DATE_FORMAT).format('M')
-    //         });
-    //
-    //         // add 1 month
-    //         setTimeout(()=>{
-    //             begin = moment(begin, DATE_FORMAT).add(1, 'months').format(DATE_FORMAT)
-    //             console.log(begin)
-    //         }, 0)
-    //
-    //     }
-    //
-    //     console.log(result)
-    //     return result
-    // }
 
     /**
+     * get width all mohths. It uses for set scrolling for heatmap
      *
+     * @return width(Number)
      */
     getScrollWidth() {
         let i = 0,
-            width = 0;
+            width = 0
 
         while(ReactDOM.findDOMNode(this.refs[`table${i}`])) {
-            let domEl = ReactDOM.findDOMNode(this.refs[`table${i}`]);
+            let domEl = ReactDOM.findDOMNode(this.refs[`table${i}`])
             width += domEl.offsetWidth;
 
-            i++;
+            i++
         }
 
-        return width;
+        return width
     }
 
     scrollItems(direction) {
-        let pos = this.refs['scrollOuter'].scrollLeft;
+        let pos = this.refs['scrollOuter'].scrollLeft
 
         if(direction === 'prev') {
             this.refs['scrollOuter'].scrollLeft = pos - 30;
@@ -189,6 +170,12 @@ class Heatmap extends React.Component {
         }
     }
 
+    /**
+     * get color for day
+     *
+     * @param num(Number) - activity for this day
+     * @return (String) - color from legend
+     */
     getDayColor(num) {
         let legend = this.props.legendSettings,
             length = legend.length,
@@ -227,12 +214,37 @@ class Heatmap extends React.Component {
         HeatmapEmitter.emit(`EmitHeatmapTable-${year}-${month}`, extendData);
     }
 
+    /**
+     * toggle scroll navigation buttons in the top
+     *
+     */
+    toggleScrollNav() {
+        let scrollWidth = this.getScrollWidth(),
+            heatmapWidth = this.refs['scrollOuter'].offsetWidth
 
-    // after render
+        if(scrollWidth < heatmapWidth) {
+            this.setState({
+                showNavButtons: false
+            })
+
+        } else {
+            this.setState({
+                showNavButtons: true
+            })
+        }
+    }
+
+
+    //---------------------------------------
+    // react lifecycles
+
     componentDidMount() {
-        let scrollWidth = this.getScrollWidth();
+        let scrollWidth = this.getScrollWidth()
 
-        this.refs['scrollInner'].setAttribute('style', `width: ${scrollWidth}px`);
+        // check scroll for heatmap
+        this.toggleScrollNav()
+
+        this.refs['scrollInner'].setAttribute('style', `width: ${scrollWidth}px`)
 
         // will send data from tables
         HeatmapEmitter.on('changeMainData', (data)=> {
@@ -242,11 +254,18 @@ class Heatmap extends React.Component {
                     this.sendDataToTable(i.year, i.month, data);
                 })
             }
-
         });
 
         // change diagram data from props to state
         HeatmapEmitter.emit('changeMainData', this.props.data);
+
+        // set resize event
+        window.addEventListener('resize', this.toggleScrollNav.bind(this));
+    }
+
+    componentWillUnmount() {
+        // remove resize listener after delete component
+        window.removeEventListener('resize', this.toggleScrollNav);
     }
 
 

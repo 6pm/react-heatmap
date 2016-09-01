@@ -911,35 +911,31 @@ let data = [
     }
 ];
 
-
+// dynamically add data to component
 (function next(counter, maxLoops) {
     // break if maxLoops has been reached
     if (counter++ >= maxLoops) return;
 
     setTimeout(function() {
         // set data into component
-        console.log(counter);
         HeatmapEmitter.emit('changeMainData', data[counter]);
         // call next() recursively
         next(counter, maxLoops);
     }, 2000);
 })(0, data.length-1);
 
-
-
 // end test data
 // -----------------------------
 
 
 // data format must be - 'D-M-YYYY'
-
 render(
     <div>
         <Heatmap
-            start={'01-02-2016'}
-            end={'21-11-2016'}
+            start={'01-01-2016'}
+            end={'21-10-2016'}
             showDays={true}
-            gorizontalView={false}
+            gorizontalView={true}
             size={20}
             margin={1}
             data={data[0]}

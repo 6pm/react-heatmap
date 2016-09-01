@@ -25,36 +25,6 @@
     </div>
   </div>
 
-  <script>
-    console.log(222);
-    var socket = new WebSocket("wss://javascript.ru/ws");
-
-    socket.onopen = function() {
-      alert("Соединение установлено.");
-    };
-
-    socket.onclose = function(event) {
-      if (event.wasClean) {
-        alert('Соединение закрыто чисто');
-      } else {
-        alert('Обрыв соединения'); // например, "убит" процесс сервера
-      }
-      alert('Код: ' + event.code + ' причина: ' + event.reason);
-    };
-
-    socket.onmessage = function(event) {
-      alert("Получены данные " + event.data);
-    };
-
-    socket.onerror = function(error) {
-      alert("Ошибка " + error.message);
-    };
-
-
-//    socket.send("Привет");
-
-  </script>
-
-  <!-- <script src="/static/bundle.js"></script> -->
+   <script src="/static/bundle.js"></script>
   </body>
 </html>

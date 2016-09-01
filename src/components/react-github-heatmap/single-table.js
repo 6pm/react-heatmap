@@ -39,7 +39,7 @@ export default  class SingleTable extends Component {
      * @return title(String)
      **/
     getTitle(year, month) {
-        return moment(`${year} ${month}`, 'YYYY M').format('MMMM');
+        return moment(`${year} ${month}`, 'YYYY M').format('MMMM')
     }
 
     /**
@@ -63,7 +63,6 @@ export default  class SingleTable extends Component {
                     'backgroundColor': hasColor['color']
                 } }
             }
-
 
             let day = <span className="heatmap__day"
                             key={i}
@@ -107,6 +106,13 @@ export default  class SingleTable extends Component {
         return indentDays;
     }
 
+    /**
+     * set width for one table
+     *
+     * @param size(Number) - width and height one day in the table
+     * @param margin(Number) - mangin between days
+     * @param gorizontalView(Boolean) - toggle display to gorizontal or vertical view
+     */
     setTableWidth(size, margin, gorizontalView, items) {
         const WEEK_DAYS = 7;
         let item = 2*margin + size,
